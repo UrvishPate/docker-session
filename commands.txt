@@ -1,0 +1,15 @@
+Image create commands
+----------------------
+1. sudo docker build . -t dockerssn:base (pick default Dockerfile)
+2. sudo docker build . -t dockerssn:java -f Dockerfile.java.envs (Pick mentioned Dockerfile)
+
+Container Create commands
+---------------------------
+1. sudo docker run -p 4500:4500 --env-file .env -d --name dockerssn-base-normal-port dockerssn:base (normal port without java)
+2. sudo docker run -p 4400:4500 --env-file .env -d --name dockerssn-base-changed-port dockerssn:base (changed port without java)
+3. sudo docker run -p 5200:5200 --env-file .env.prod -d --name dockerssn-java-normal-port dockerssn:java (normal port with java)
+3. sudo docker run -p 5400:5200 --env-file .env.prod -d --name dockerssn-java-changed-port dockerssn:java (changed port with java)
+
+enter the shell of running Container
+-------------------------------------
+sudo docker exec -it [container id] "bash" (sh or bash)

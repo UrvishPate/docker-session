@@ -6,22 +6,21 @@ FROM openjdk:11-jdk-slim AS java-builder
 # temporary path
 WORKDIR /java-bin
 
+RUN mkdir servejdk
 # copy jdk 11 to main dir
-RUN cp -R /usr/local/openjdk-11/* .
-
+RUN cp -R /usr/local/openjdk-11/* ./servejdk
 
 
 # MAIN APP
 # LTS based node image
 # ------------------------------
-FROM node:18-alpine 
+FROM node:18-slim 
 
 # copy from above openjdk image
-COPY --from=java-builder /java-bin /usr/local/openjdk-11
+COPY --from=java-builder /java-bin/servejdk /usr/local/openjdk-11
 
 # set directory name of app
 WORKDIR /nodeXP
-
 
 # copy package to install in that particular directory
 COPY package*.json ./
@@ -36,4 +35,7 @@ COPY build ./build
 EXPOSE 5200
 
 # add script to run apps
-CMD [ "npm","start" ]
+CMD [ "npm", "start" ]
+
+# Update PATH to include Java binaries
+ENV PATH="/usr/local/openjdk-11/bin:${PATH}"
