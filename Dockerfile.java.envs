@@ -1,8 +1,27 @@
-#LTS based node image
+# DEPENDENCY (used as artifact)
+# used openjdk java version 11
+# --------------------------
+FROM openjdk:11-jdk-slim AS java-builder
+
+# temporary path
+WORKDIR /java-bin
+
+# copy jdk 11 to main dir
+RUN cp -R /usr/local/openjdk-11/* .
+
+
+
+# MAIN APP
+# LTS based node image
+# ------------------------------
 FROM node:18-alpine 
+
+# copy from above openjdk image
+COPY --from=java-builder /java-bin /usr/local/openjdk-11
 
 # set directory name of app
 WORKDIR /nodeXP
+
 
 # copy package to install in that particular directory
 COPY package*.json ./
