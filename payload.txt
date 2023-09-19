@@ -1,0 +1,14 @@
+1 . Hello world Java
+---------------------------
+{
+    "code" : "class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\"); \n    }\n}",
+    "filename" : "HelloWorld"
+}
+
+
+2.  reverse order
+-------------------------------
+{
+    "code": "  public class ReverseArray {  \n        public static void main(String[] args) {  \n            //Initialize array  \n            int [] arr = new int [] {1, 2, 3, 4, 5};  \n            System.out.println(\"Original array: \");  \n            for (int i = 0; i < arr.length; i++) {  \n                System.out.print(arr[i] + \" \");  \n            }  \n            System.out.println();  \n            System.out.println(\"Array in reverse order: \");  \n            //Loop through the array in reverse order  \n            for (int i = arr.length-1; i >= 0; i--) {  \n                System.out.print(arr[i] + \" \");  \n            }  \n        }  \n    } ",
+    "filename": "ReverseArray"
+}
