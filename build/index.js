@@ -27,7 +27,15 @@ app.post("/java-compiler", (req, res) => __awaiter(void 0, void 0, void 0, funct
         const { code, filename } = req.body;
         if (!code || !filename)
             throw "Required Body";
+        console.time("compiled");
+        console.log("Java Input:");
+        console.log("---------------------");
+        console.log(code);
         const compiled_code = yield (0, javacompiler_1.default)(code, filename);
+        console.log("Java Output:");
+        console.log("---------------------");
+        console.log(compiled_code.result);
+        console.timeEnd("compiled");
         res.status(200).json({
             result: compiled_code.result,
             version: compiled_code.version,
